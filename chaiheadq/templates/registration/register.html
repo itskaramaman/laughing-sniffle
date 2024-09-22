@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Register Form</h2>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="bg-blue-500 py-1 px-2 hover:bg-blue-600 rounded-lg text-white">Register</button>
+</form>
+{% endblock %}

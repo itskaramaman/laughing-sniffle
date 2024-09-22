@@ -1,0 +1,42 @@
+{% extends 'layout.html' %} {% block title %} Chai aur tweet {% endblock %} 
+{% block content %}
+<div class="p-10 bg-blue-100">
+  <a
+    class="bg-orange-500 text-white rounded-md p-2 my-5"
+    href="{% url 'tweet_create' %}"
+    >Create Tweet</a
+  >
+
+  <h1 class="text-3xl my-5">Recent Tweets</h1>
+
+  <div class="flex flex-wrap gap-5">
+    {% for tweet in tweets %}
+    <div class="bg-gray-700 w-[300px] rounded-md">
+      <img
+        class="w-full h-[300px] object-cover"
+        src="{{tweet.photo.url}}"
+        alt="photo"
+      />
+      <div class="p-2 text-white">
+        <h2 class="text-lg">{{tweet.user.username}}</h2>
+        <p class="line-clamp-2">{{tweet.text}}</p>
+        {% if tweet.user == user %}
+        <div class="flex justify-between">
+          <a
+            class="bg-blue-500 py-1 px-2 hover:bg-blue-600 rounded-lg"
+            href="{% url 'tweet_edit' tweet.id %}"
+            >Edit</a
+          >
+          <a
+            class="bg-red-500 py-1 px-2 hover:bg-red-600 rounded-lg"
+            href="{% url 'tweet_delete' tweet.id %}"
+            >Delete</a
+          >
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

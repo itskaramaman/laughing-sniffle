@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %} Chai aur Django {% endblock %}</title>
+  </head>
+  <body>
+    <nav class="p-6 bg-gray-700 text-white flex justify-between items-center">
+      <h1 class="cursor-pointer text-xl">TweetBar</h1>
+      <div>
+        <ul class="flex gap-5">
+          <li class="cursor-pointer hover:text-green-300">About</li>
+
+          {% if user.is_authenticated %}
+          <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+          </form>
+
+          {% else %}
+          <li class="cursor-pointer hover:text-green-300">Login</li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <div class="bg-gray-50">{% block content %} {% endblock %}</div>
+  </body>
+</html>
